@@ -3,16 +3,12 @@ package com.planit.pageobjects;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import static com.planit.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
 public class ContactPage extends CommonPageUtil<ContactPage> {
 
-    public static String CONTACTPAGEURL = "https://jupiter.cloud.planittesting.com/#/contact";
-    public static final String FORENAME = "TestForename";
-    public static final String EMAIL = "testemail@xyz.com";
-    public static final String MESSAGE = "Test Message";
+    public static String CONTACTPAGE_URL = "https://jupiter.cloud.planittesting.com/#/contact";
 
     @FindBy(id = "forename")
     private WebElement foreNameField;
@@ -35,20 +31,23 @@ public class ContactPage extends CommonPageUtil<ContactPage> {
     @FindBy(id = "message-err")
     private WebElement messageError;
 
-    public void enterForeName() {
-        foreNameField.sendKeys(FORENAME);
+    @FindBy(className = "alert-success")
+    private WebElement successMessage;
+
+    public void enterForeName(String forename) {
+        foreNameField.sendKeys(forename);
     }
 
-    public void enterEmail() {
-        emailField.sendKeys(EMAIL);
+    public void enterEmail(String email) {
+        emailField.sendKeys(email);
     }
 
-    public void enterMessage() {
-        messageField.sendKeys(MESSAGE);
+    public void enterMessage(String message) {
+        messageField.sendKeys(message);
     }
 
     public void clickSubmitButton() {
-        submitButton.click();
+        clickByJavaScript(submitButton);
     }
 
     public String getForeNameErrorMessage() {
@@ -87,16 +86,21 @@ public class ContactPage extends CommonPageUtil<ContactPage> {
         }
     }
 
+    public String getSuccessMessage(){
+        waitForExpectedElement(successMessage);
+        return successMessage.getText();
+    }
+
     @Override
     protected void load() {
-        getDriver().get(CONTACTPAGEURL);
+        getDriver().get(CONTACTPAGE_URL);
     }
 
     @Override
     protected void isLoaded() throws Error {
         waitForPageLoad();
         String url = getDriver().getCurrentUrl();
-        assertEquals("Not on the contact page: " + url, "https://jupiter.cloud.planittesting.com/#/contact", url);
+        assertEquals("Not on the contact page: " + url, CONTACTPAGE_URL, url);
     }
 }
 

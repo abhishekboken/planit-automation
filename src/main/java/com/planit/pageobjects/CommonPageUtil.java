@@ -56,10 +56,19 @@ public abstract class CommonPageUtil<T extends LoadableComponent<T>> extends Loa
      */
     public void waitForExpectedElement(WebElement element) {
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            WebDriverWait wait = new WebDriverWait(getDriver(), 15);
             wait.until(ExpectedConditions.visibilityOf(element));
         } catch (WebDriverException e) {
             log.info("Exception occurred on wait for expected element");
         }
+    }
+
+    /**
+     * Clicks on a WebElement using a javaScript event.
+     * @param element locator for an element to be clicked
+     */
+    public void clickByJavaScript(WebElement element){
+        JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 }

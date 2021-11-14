@@ -3,8 +3,12 @@
 <suite name = "planIT regression suite">
     <test name = "Contact">
         <classes>
-            <class name= "com.planit.tests.BrowserHooks"></class>
             <class name = "com.planit.tests.ContactPageTests"></class>
+        </classes>
+    </test>
+    <test name = "Cart">
+        <classes>
+            <class name= "com.planit.tests.CartPageTests"></class>
         </classes>
     </test>
 </suite>
