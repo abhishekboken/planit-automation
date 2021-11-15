@@ -9,17 +9,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
 
 @Listeners(ScreenshotListener.class)
-public class ContactPageTests extends BrowserHooks {
+public class ContactPageTests extends BaseTest {
 
     public static final String FORENAME = "TestForename";
     public static final String EMAIL = "testemail@xyz.com";
     public static final String FEEDBACK_MESSAGE = "Test Message";
 
+    /**
+     * This test method validates the mandatory fields on the contact page.
+     */
     @Test
     public void mandatoryFields() {
         ContactPage contact = new ContactPage();
         contact.get();
 
+        // Verifies mandatory fields error messages
         contact.clickSubmitButton();
         assertThat("Forename mandatory error message is not present", contact.getForeNameErrorMessage(),
                 equalTo("Forename is required"));
@@ -28,6 +32,7 @@ public class ContactPageTests extends BrowserHooks {
         assertThat("Message field mandatory error message is not present", contact.getMessageError(),
                 equalTo("Message is required"));
 
+        // Verifies that error messages are gone when mandatory fields are populated
         contact.enterForeName(FORENAME);
         assertFalse("Forename mandatory error message is still present", contact.foreNameWebElementPresence());
 
@@ -38,7 +43,10 @@ public class ContactPageTests extends BrowserHooks {
         assertFalse("Message mandatory error message is still present", contact.messageWebElementPresence());
     }
 
-    @Test (invocationCount = 5)
+    /**
+     * This test method verifies feedback submit functionality 5 times.
+     */
+    @Test(invocationCount = 5)
     public void submitFeedback() {
         ContactPage contact = new ContactPage();
         contact.get();
@@ -49,7 +57,7 @@ public class ContactPageTests extends BrowserHooks {
         contact.clickSubmitButton();
 
         assertThat("Feedback success message is not displayed", contact.getSuccessMessage(),
-                equalTo("Thanks " + FORENAME +  ", we appreciate your feedback."));
+                equalTo("Thanks " + FORENAME + ", we appreciate your feedback."));
     }
 
 }

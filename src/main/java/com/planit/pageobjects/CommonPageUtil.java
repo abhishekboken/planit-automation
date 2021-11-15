@@ -65,10 +65,12 @@ public abstract class CommonPageUtil<T extends LoadableComponent<T>> extends Loa
 
     /**
      * Clicks on a WebElement using a javaScript event.
+     *
      * @param element locator for an element to be clicked
      */
-    public void clickByJavaScript(WebElement element){
-        JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+    public void clickByJavaScript(WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
+
 }

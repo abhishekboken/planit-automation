@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 import static com.planit.core.DriverFactory.*;
 
-public class BrowserHooks {
+public class BaseTest {
 
     @BeforeMethod
     public void initialize() {
@@ -24,6 +24,10 @@ public class BrowserHooks {
         getDriver().manage().deleteAllCookies();
     }
 
+    /**
+     * Captures the screenshot for failed test step under Report output in the testng report.
+     * @param result instance that provides the result of the test
+     */
     public void testFailureScreenshot(ITestResult result) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
