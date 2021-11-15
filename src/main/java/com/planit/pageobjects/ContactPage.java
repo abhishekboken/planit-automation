@@ -127,6 +127,7 @@ public class ContactPage extends CommonPageUtil<ContactPage> {
     @Override
     protected void load() {
         getDriver().get(CONTACT_PAGE_URL);
+        log.info("Navigating to contact page: " + CONTACT_PAGE_URL);
     }
 
     @Override

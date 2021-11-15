@@ -23,6 +23,7 @@ public class HomePage extends CommonPageUtil<HomePage>{
     @Override
     protected void load() {
         getDriver().get(HOME_PAGE_URL);
+        log.info("Navigating to home page: " + HOME_PAGE_URL);
     }
 
     @Override
